@@ -8,10 +8,10 @@ soup = BeautifulSoup(source, 'lxml')
 
 # print(soup.prettify())
 
-csv_file = open('cms_scrape1.csv', 'w')
+csv_file = open('cms_scrape.csv', 'w')
 
 csv_writer = csv.writer(csv_file)
-csv_writer.writerow(['headline\n', 'summary\n', 'video_link\n'])
+csv_writer.writerow(['headline', 'summary', 'video_link'])
 
 
 for article in soup.findAll('article'):
@@ -24,15 +24,6 @@ for article in soup.findAll('article'):
 	summary = article.find('div', class_='entry-content').p.text
 	print(summary)
 
-	vid_src = article.find('iframe', class_='youtube-player')['src']
-	# print(vid_src)
-
-	vid_id = vid_src.split('/')[4]
-	vid_id = vid_id.split('?')[0]
-	# print(vid_id)
-
-	yt_link = f'https://youtube.com/watch?v={vid_id}'
-	#print(yt_link)
 
 	try:
 		vid_src = article.find('iframe', class_='youtube-player')['src']
@@ -53,3 +44,4 @@ for article in soup.findAll('article'):
 	csv_writer.writerow([headline.encode("utf-8"), summary.encode("utf-8"), yt_link.encode("utf-8")])
 
 csv_file.close()
+

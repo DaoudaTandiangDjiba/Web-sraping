@@ -25,10 +25,10 @@ f.write(headers)
 for container in containers:
 	brand = container.find("div","item-branding").a.img["title"]
 	title_container = container.find("a","item-title")
-	product_name = title_container.text
+	product_name = title_container[0].text
 
 	shipping_container = container.find("li","price-ship")
-	shipping = shipping_container.text.strip()
+	shipping = shipping_container[0].text.strip()
 
 	print("brand: " + brand)
 	print("product_name: " + product_name)
